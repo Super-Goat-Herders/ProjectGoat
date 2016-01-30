@@ -132,6 +132,8 @@ public class AIPath : MonoBehaviour {
 	protected Vector3 lastFoundWaypointPosition;
 	protected float lastFoundWaypointTime = -9999;
 
+    public bool isGrounded;
+
 	/** Returns if the end-of-path has been reached
 	 * \see targetReached */
 	public bool TargetReached {
@@ -247,6 +249,7 @@ public class AIPath : MonoBehaviour {
 
 		//We should search from the current position
 		seeker.StartPath (GetFeetPosition(), targetPosition);
+
 	}
 
 	public virtual void OnTargetReached () {
@@ -318,13 +321,28 @@ public class AIPath : MonoBehaviour {
 	}
 
 	public virtual void Update () {
+        /*
+        isGrounded = controller.isGrounded;
+
+        if (isGrounded)
+        {
+            verticalVelosity -= 0;
+        }
+        else
+        {
+            verticalVelosity -= 1;
+        }
+          */
+
+        //GetComponent<Collider>().attachedRigidbody.AddForce(new Vector3(0f, 9.8f, 0f), ForceMode.Force);
 
 		if (!canMove) { return; }
 
 		Vector3 dir = CalculateVelocity (GetFeetPosition());
 
 		//Rotate towards targetDirection (filled in by CalculateVelocity)
-		RotateTowards (targetDirection);
+		//RotateTowards (targetDirection);
+
 
 		if (navController != null) {
 		} else if (controller != null) {
@@ -392,11 +410,13 @@ public class AIPath : MonoBehaviour {
 		}
 
 		Vector3 dir = vPath[currentWaypointIndex] - vPath[currentWaypointIndex-1];
+
 		Vector3 targetPosition = CalculateTargetPoint (currentPosition,vPath[currentWaypointIndex-1] , vPath[currentWaypointIndex]);
 
 
 		dir = targetPosition-currentPosition;
-		dir.y = 0;
+
+		//dir.y = 0;
 		float targetDist = dir.magnitude;
 
 		float slowdown = Mathf.Clamp01 (targetDist / slowdownDistance);
@@ -406,7 +426,6 @@ public class AIPath : MonoBehaviour {
 
 		if (currentWaypointIndex == vPath.Count-1 && targetDist <= endReachedDistance) {
 			if (!targetReached) { targetReached = true; OnTargetReached (); }
-
 			//Send a move request, this ensures gravity is applied
 			return Vector3.zero;
 		}
@@ -415,11 +434,13 @@ public class AIPath : MonoBehaviour {
 		float dot = Vector3.Dot (dir.normalized,forward);
 		float sp = speed * Mathf.Max (dot,minMoveScale) * slowdown;
 
-
 		if (Time.deltaTime	> 0) {
 			sp = Mathf.Clamp (sp,0,targetDist/(Time.deltaTime*2));
 		}
-		return forward*sp;
+ 
+        //Vector3 myVector = new Vector3(forward.x, forward.z, forward.z);
+        return dir.normalized * speed;
+		//return forward*sp;
 	}
 
 	/** Rotates in the specified direction.
@@ -451,8 +472,8 @@ public class AIPath : MonoBehaviour {
 	 * \todo This function uses .magnitude quite a lot, can it be optimized?
 	 */
 	protected Vector3 CalculateTargetPoint (Vector3 p, Vector3 a, Vector3 b) {
-		a.y = p.y;
-		b.y = p.y;
+		//a.y = p.y;
+		//b.y = p.y;
 
 		float magn = (a-b).magnitude;
 		if (magn == 0) return a;
@@ -461,10 +482,10 @@ public class AIPath : MonoBehaviour {
 		Vector3 point = (b-a)*closest + a;
 		float distance = (point-p).magnitude;
 
-		float lookAhead = Mathf.Clamp (forwardLook - distance, 0.0F, forwardLook);
+		float lookAhead = Mathf.Clamp (forwardLook - distance, 1.0F, forwardLook);
 
 		float offset = lookAhead / magn;
-		offset = Mathf.Clamp (offset+closest,0.0F,1.0F);
+		offset = Mathf.Clamp (offset+closest,1.0F,1.0F);
 		return (b-a)*offset + a;
 	}
 }

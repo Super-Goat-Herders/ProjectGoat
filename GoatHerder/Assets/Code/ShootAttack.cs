@@ -10,17 +10,20 @@ public class ShootAttack : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = 0;
-        currentCheck = ((Random.value * 2) + 5);
+        currentCheck = ((Random.value * 2) + 3);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         timer += Time.deltaTime;
-        Debug.Log(timer);
-        transform.LookAt(target);
+        //Debug.Log(timer);
+        Vector3 relativePos = target.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = rotation;
         if (timer > currentCheck)
         {
-            Object MyArrow = Instantiate(arrows, transform.position, transform.rotation);
+            Object MyArrow = Instantiate(arrows, transform.position, rotation);
+            timer = 0;
         }
 	}
 }
