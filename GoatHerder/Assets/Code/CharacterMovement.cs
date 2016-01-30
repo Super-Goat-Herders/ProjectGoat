@@ -14,29 +14,39 @@ public class CharacterMovement : MonoBehaviour {
 	void Update () {
         var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         transform.position += move * speed * Time.deltaTime;
-        if (Input.GetAxis("Horizontal") != 0)
+        if ((Mathf.Abs(Input.GetAxis("Horizontal")) != 0) || (Mathf.Abs(Input.GetAxis("Vertical")) != 0))
         {
             if (playerAnimator.GetBool("Stopped") == true)
             {
                 playerAnimator.SetBool("Stopped", false);
             }
-        }
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            if (playerAnimator.GetBool("Stopped") == true)
+            if ((Mathf.Abs(Input.GetAxis("Horizontal")) > (Mathf.Abs(Input.GetAxis("Vertical")))))
             {
-                playerAnimator.SetBool("Stopped", false);
-            }
-
-            if (Input.GetAxis("Vertical") > 0)
-            {
-                playerAnimator.SetBool("Backward", true);
                 playerAnimator.SetBool("Forward", false);
-            }
-            if (Input.GetAxis("Vertical") < 0)
-            {
-                playerAnimator.SetBool("Forward", true);
                 playerAnimator.SetBool("Backward", false);
+                playerAnimator.SetBool("Sideways", true);
+                if (Input.GetAxis("Horizontal") > 0) {
+                    transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+                else{
+                    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                }
+            
+        }
+            else
+            {
+                if (Input.GetAxis("Vertical") > 0)
+                {
+                    playerAnimator.SetBool("Forward", false);
+                    playerAnimator.SetBool("Backward", true);
+                    playerAnimator.SetBool("Sideways", false);
+                }
+                else
+                {
+                    playerAnimator.SetBool("Forward", true);
+                    playerAnimator.SetBool("Backward", false);
+                    playerAnimator.SetBool("Sideways", false);
+                }
             }
         }
         else
@@ -44,6 +54,7 @@ public class CharacterMovement : MonoBehaviour {
             playerAnimator.SetBool("Forward", false);
             playerAnimator.SetBool("Backward", false);
             playerAnimator.SetBool("Stopped", true);
+            playerAnimator.SetBool("Sideways", false);
         }
 
 
