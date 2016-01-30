@@ -22,9 +22,4 @@ public class CharacterMovement : MonoBehaviour {
             Debug.Log("YOU DID IT!");
         }
     }
-
-    void ApplyDamage(int damage)
-    {
-        
-    }
 }
