@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using System.Collections;
-using System;
+using Random = UnityEngine.Random;
 
 //Game Engine
-public class GameEngine : MonoBehavior {
+public class GameEngine : MonoBehaviour {
     public enum TileType { Wall, Floor }
     //Room Size
     public int columns = 100;
@@ -21,7 +22,7 @@ public class GameEngine : MonoBehavior {
     //Prefab Objects
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
-    public GameObject[] outerWalls;
+    public GameObject[] outerWallTiles;
     public GameObject[] NPCs;
     //....
     
@@ -40,8 +41,8 @@ public class GameEngine : MonoBehavior {
     private void Start() 
     {
         levelHolder = new GameObject("Level_1_Holder");
-        SetupTilesArray();
-        CreateRoomsAndCorridors();
+        setupTiles();
+        generateRoomsAndCorridors();
         InstantiateTiles ();
         InstantiateOuterWalls ();   
     }
@@ -77,12 +78,12 @@ public class GameEngine : MonoBehavior {
             rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1]);
             
             //And add a corridor to the new room
-            if (i < corridorLength)
+            if (i < corridors.Length)
             {
                 corridors[i] = new Corridor();
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);    
             }
-            if(i == rooms.Length *.5f)
+            if(i == rooms.Length / 2)
             {
                 Vector3 playerPos = new Vector3 (rooms[i].xPos, rooms[i].yPos, 0);
                 Instantiate(player, playerPos, Quaternion.identity); //??? No idea what this does
@@ -190,7 +191,7 @@ public class GameEngine : MonoBehavior {
         //create an instance of the randomly selected prefab
         GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
         
-        tileInstance.transform.parent = boardHolder.transform;
+        tileInstance.transform.parent = levelHolder.transform;
     }
 }
 //Serializable for the inspector???
@@ -236,7 +237,7 @@ public class Corridor
         direction = (Direction)Random.Range(0,4);
         
         //Give the opposite end the correct direction
-        Direction oppositeDirection = (Direction)(((int)room.enteringCorridor + 2) % 4);
+        Direction oppositeDirection = (Direction)(((int)room.corridorIn + 2) % 4);
         
         //If north and random direction is opposite previous corridors direction, rotate 90 degrees clockwise 
         if(!firstCorridor && direction == oppositeDirection)
@@ -320,7 +321,7 @@ public class Room
                 xPos = Mathf.Clamp(xPos, 0, columns - roomWidth);
                 break;
             case Direction.East:
-                roomWidth = Mathf.Clamp(roomWidth, 1, colums - corridor.xEndPosition);
+                roomWidth = Mathf.Clamp(roomWidth, 1, columns - corridor.xEndPosition);
                 xPos = corridor.xEndPosition;
                 //constrained psuedo-random y initial position
                 yPos = Random.Range(corridor.yEndPosition - roomHeight + 1, corridor.yEndPosition);
