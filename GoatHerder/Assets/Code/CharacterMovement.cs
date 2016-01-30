@@ -25,6 +25,6 @@ public class CharacterMovement : MonoBehaviour {
 
     void ApplyDamage(int damage)
     {
-
+        
     }
 }

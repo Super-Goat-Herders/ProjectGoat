@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class ArrowScript : MonoBehaviour {
-    public Vector3 myTarget;
-    public Vector3 myRotation;
-    public Vector3 myStart;
     public float speed;
 
 	// Use this for initialization
@@ -19,16 +16,20 @@ public class ArrowScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("We are getting here");
+        Debug.Log("We got here to collision");
         if (coll.gameObject.tag == "Hero")
         {
-            //coll.gameObject.SendMessage("ApplyDamage", 10);
+            coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
         }
+
         if (coll.gameObject.tag == "Wall")
         {
+            Debug.Log("We got here");
             speed = 0;
         }
+
+        
 
 
     }

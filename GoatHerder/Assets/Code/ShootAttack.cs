@@ -19,7 +19,7 @@ public class ShootAttack : MonoBehaviour {
         //Debug.Log(timer);
         Vector3 relativePos = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(relativePos);
-        transform.rotation = rotation;
+        //transform.rotation = rotation;
         if (timer > currentCheck)
         {
             Object MyArrow = Instantiate(arrows, transform.position, rotation);

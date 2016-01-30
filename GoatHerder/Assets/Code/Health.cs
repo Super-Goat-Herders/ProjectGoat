@@ -20,12 +20,12 @@ public class Health : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown ("n")) {
-			Heal (1);
-		}
-		if (Input.GetKeyDown ("space")) {
-			TakeDamage (1);
-		}
+		//if (Input.GetKeyDown ("n")) {
+		//	Heal (1);
+		//}
+		//if (Input.GetKeyDown ("space")) {
+		//	TakeDamage (1);
+		//}
 
 		while(hearts.Count != currentHP){
 			Vector3 loc = new Vector3(x+(hearts.Count*Sx), y);
@@ -38,6 +38,9 @@ public class Health : MonoBehaviour {
 
 	// Use this to take damage
 	public void TakeDamage(int damage){
+        
+        
+        
 		if (currentHP > 0) {
 			Transform dead = hearts [hearts.Count - 1];
 			Vector3 loc = new Vector3(x+((hearts.Count-1)*Sx), y);
