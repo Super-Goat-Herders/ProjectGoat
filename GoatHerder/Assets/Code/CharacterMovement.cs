@@ -14,4 +14,17 @@ public class CharacterMovement : MonoBehaviour {
         transform.position += move * speed * Time.deltaTime;
         //Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, -10f);
 	}
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Door")
+        {
+            Debug.Log("YOU DID IT!");
+        }
+    }
+
+    void ApplyDamage(int damage)
+    {
+
+    }
 }
