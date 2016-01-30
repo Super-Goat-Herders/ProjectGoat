@@ -23,7 +23,7 @@ public class GameEngine : MonoBehaviour {
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
-    public GameObject[] NPCs;
+    //public GameObject[] NPCs;
     //....
     
     public GameObject player;
@@ -51,7 +51,7 @@ public class GameEngine : MonoBehaviour {
     {
         //needed for level tile grid width
         tiles = new TileType[columns][];
-        for (int i = 0; i <= tiles.Length; ++i)
+        for (int i = 0; i < tiles.Length; ++i)
         {
            //needed for level tile grid height
            tiles[i] = new TileType[rows];
@@ -83,7 +83,7 @@ public class GameEngine : MonoBehaviour {
                 corridors[i] = new Corridor();
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);    
             }
-            if(i == rooms.Length / 2)
+            if(i == rooms.Length * .5f)
             {
                 Vector3 playerPos = new Vector3 (rooms[i].xPos, rooms[i].yPos, 0);
                 Instantiate(player, playerPos, Quaternion.identity); //??? No idea what this does
