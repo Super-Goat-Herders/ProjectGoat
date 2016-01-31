@@ -25,7 +25,7 @@ public class Health : MonoBehaviour {
 		currentHP = startHP;
 	}
 	void  Reset(){
-		UnityEngine.SceneManagement.SceneManager.LoadScene (0);
+		UnityEngine.SceneManagement.SceneManager.LoadScene("OpeningScene");
 	}
 	void Update(){
 		//if (Input.GetKeyDown ("n")) {
@@ -33,9 +33,9 @@ public class Health : MonoBehaviour {
 		//}
 		y = gameObject.transform.position.y + 1;
 		x = gameObject.transform.position.x - 1;
-	    if (Input.GetKeyDown ("space")) {
-			TakeDamage (1);
-	    }
+	    //if (Input.GetKeyDown ("space")) {
+		//	TakeDamage (1);
+	    //}
 		if (currentHP <= 0 && !isDead) {
             isDead = true;
 			Vector3 loc1 = gameObject.transform.position;
