@@ -36,7 +36,7 @@ public class Pickup : MonoBehaviour {
 				scriptArrow.arrowDamage = 2;
 			} else {
 				scriptMove.speed = 2.5f;
-				scriptArrow.arrowDamage = 1.5f;
+				scriptArrow.arrowDamage = 1;
 			}
 			AudioSource.PlayClipAtPoint(sound, transform.position);
 		}
