@@ -5,6 +5,7 @@ public class Pickup : MonoBehaviour {
 	
 	public GameObject player = GameObject.Find("MainCharacter");
 	public CharacterMovement scriptMove;
+	public CharacterProjectile scriptArrow;
 	public Health scriptHP;
 	public UnityEngine.UI.Text textbox;
 	public AudioClip sound;
@@ -20,20 +21,22 @@ public class Pickup : MonoBehaviour {
 			Destroy(gameObject);
 			float rekt = Random.value;
 			if (rekt <= 0.2) {
-				scriptMove.speed = 2.5f;
+				scriptMove.speed = 3f;
 				//textbox.text = "Faster Speed! :)";
-			}
-			else if (rekt > 0.2 && rekt <= 0.3){
+			} else if (rekt > 0.2 && rekt <= 0.3) {
 				scriptMove.speed = 1.5f;
 				//textbox.text = "Slower Speed! :(";
-			}
-			else if (rekt > 0.3 && rekt <= 0.5){
-				scriptHP.Heal(1);
+			} else if (rekt > 0.3 && rekt <= 0.5) {
+				scriptHP.Heal (1);
 				//textbox.text = "+1 HP!! :D";
-			}
-			else if(rekt > 0.5 && rekt <= 0.6){
-				scriptHP.TakeDamage(1);
+			} else if (rekt > 0.5 && rekt <= 0.6) {
+				scriptHP.TakeDamage (1);
 				//textbox.text = "-1 HP!";
+			} else if (rekt > 0.6 && rekt <= 0.9) {
+				scriptArrow.arrowDamage = 2;
+			} else {
+				scriptMove.speed = 2.5f;
+				scriptArrow.arrowDamage = 1.5f;
 			}
 			AudioSource.PlayClipAtPoint(sound, transform.position);
 		}
