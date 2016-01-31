@@ -194,16 +194,12 @@ public class LevelGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
-<<<<<<< HEAD
-        Debug.Log(Mathf.RoundToInt(xCoord));
-        Debug.Log(Mathf.RoundToInt(yCoord));
-        Vector3 position = new Vector3(Mathf.Round(xCoord), Mathf.Round(yCoord), 0f);
-=======
         Vector3 position = new Vector3(xCoord, yCoord, 0f);
->>>>>>> a1abce317ae770b9a58975816a8e97a796987dd6
 
         // Create an instance of the prefab from the random index of the array.
         GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+
+        // Weird scaling trick that fixed the black lines/rendering issue.
         tileInstance.transform.localScale = new Vector3(1.01f, 1.01f, 1.0f);
 
         // Set the tile's parent to the board holder.
