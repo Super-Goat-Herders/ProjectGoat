@@ -40,7 +40,7 @@ public class CharacterMovement : MonoBehaviour {
                 }
                 else
                 {
-                    // transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    //transform.localRotation = Quaternion.Euler(0, 180, 0);
                     // Camera.current.transform.localRotation = Quaternion.Euler(0, -180, 0);
                 }
 
