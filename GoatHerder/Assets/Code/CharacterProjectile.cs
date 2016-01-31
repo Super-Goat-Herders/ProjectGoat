@@ -5,11 +5,13 @@ public class CharacterProjectile : MonoBehaviour {
     public float speed;
     public float timer;
     public int myDirection;
+	public int arrowDamage;
 
 	// Use this for initialization
 	void Start () {
         speed = 3f;
         timer = 0;
+		arrowDamage = 1;
         //Vector3 temp = new Vector3(0, 0, 0-1f);
         //GameObject.transform.position.z = -1;
         //gameObject.transform.position.z = -1;
@@ -52,7 +54,7 @@ public class CharacterProjectile : MonoBehaviour {
         if (coll.gameObject.tag == "Enemy")
         {
             Destroy(gameObject);
-            coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
+            coll.gameObject.SendMessage("TakeDamage", arrowDamage, SendMessageOptions.DontRequireReceiver);
         }
 
     }
