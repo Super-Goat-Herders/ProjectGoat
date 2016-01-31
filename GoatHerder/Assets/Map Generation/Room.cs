@@ -9,6 +9,10 @@ public class Room
     {
         roomWidth = widthRange.Random;
         roomHeight = heightRange.Random;
+        
+        Debug.Log(Mathf.RoundToInt(Mathf.RoundToInt(columns / 2f - roomWidth / 2f)));
+        Debug.Log(Mathf.RoundToInt((rows / 2f - roomHeight / 2f)));
+        
         xPos = Mathf.RoundToInt(columns / 2f - roomWidth / 2f);
         yPos = Mathf.RoundToInt(rows / 2f - roomHeight / 2f);
     }

@@ -194,6 +194,8 @@ public class LevelGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
+        Debug.Log(Mathf.RoundToInt(xCoord));
+        Debug.Log(Mathf.RoundToInt(yCoord));
         Vector3 position = new Vector3(Mathf.Round(xCoord), Mathf.Round(yCoord), 0f);
 
         // Create an instance of the prefab from the random index of the array.
