@@ -26,7 +26,6 @@ public class GoatStupid : MonoBehaviour {
 	void DoMyWindow(int windowID) {
 		name = GUI.TextField(new Rect(10, 20, 100, 20), name, 15);
 		if(Input.GetKeyDown("return") || Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey ("enter")){
-			nameGoat = false;
 			//NEW SCENE
 		}
 

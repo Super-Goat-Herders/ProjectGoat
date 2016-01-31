@@ -5,7 +5,7 @@ public class CharacterMovement : MonoBehaviour {
     public float speed = 2f;
     Animator playerAnimator;
 	public AudioClip sound;
-
+	public ParticleSystem explo;
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
