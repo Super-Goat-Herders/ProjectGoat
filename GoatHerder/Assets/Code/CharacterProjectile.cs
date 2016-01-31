@@ -9,6 +9,9 @@ public class CharacterProjectile : MonoBehaviour {
 	void Start () {
         speed = 3f;
         timer = 0;
+        //Vector3 temp = new Vector3(0, 0, 0-1f);
+        //GameObject.transform.position.z = -1;
+        //gameObject.transform.position.z = -1;
 	}
 	
 	// Update is called once per frame
@@ -31,6 +34,13 @@ public class CharacterProjectile : MonoBehaviour {
             Destroy(gameObject);
         }
         timer += Time.deltaTime;
+        if (coll.gameObject.tag == "Enemy")
+        {
+            Debug.Log("We got here");
+            //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
+            Destroy(gameObject);
+            coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
+        }
 
     }
 }
