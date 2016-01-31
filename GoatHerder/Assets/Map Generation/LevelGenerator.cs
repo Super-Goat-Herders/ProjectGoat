@@ -142,10 +142,12 @@ public class LevelGenerator : MonoBehaviour
             for (int j = 0; j < tiles[i].Length; j++)
             {
                 // ... and instantiate a floor tile for it.
-                InstantiateFromArray(floorTiles, i, j);
-
+                if (tiles[i][j] == TileType.Floor)
+                {
+                    InstantiateFromArray(floorTiles, i, j);
+                }
                 // If the tile type is Wall...
-                if (tiles[i][j] == TileType.Wall)
+                else
                 {
                     // ... instantiate a wall over the top.
                     InstantiateFromArray(wallTiles, i, j);

@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class HunterScript : MonoBehaviour {
-    public Transform target;
+    private Transform target;
     Animator playerAnimator;
 
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
+	    target = GameObject.FindWithTag("Hero").transform;
 	}
 	
 	// Update is called once per frame
