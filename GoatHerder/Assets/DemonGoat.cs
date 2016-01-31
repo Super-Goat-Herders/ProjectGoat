@@ -24,8 +24,10 @@ public class DemonGoat : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        //hitboxes[myOrientation].enabled = false;
-        //playerAnimator.SetBool("Attack", false);
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         if (lastPostion == transform.position)
         {
             playerAnimator.SetBool("Moving", false);

@@ -13,7 +13,7 @@ public class GoatStupid : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 	void OnTriggerEnter2D(Collider2D other)	{
 		nameGoat = true;
@@ -22,11 +22,14 @@ public class GoatStupid : MonoBehaviour {
 	void OnGUI() {
 		if(nameGoat)
 			windowRect = GUI.Window(0, windowRect, DoMyWindow, "Name your goat..");
+		if(Input.GetKeyDown("return") || Input.GetKey(KeyCode.KeypadEnter) || Input.GetKeyDown ("enter")){
+			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+		}
 	}
 	void DoMyWindow(int windowID) {
 		name = GUI.TextField(new Rect(10, 20, 100, 20), name, 15);
-		if(Input.GetKeyDown("return") || Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey ("enter")){
-			//NEW SCENE
+		if(Input.GetKeyDown("return") || Input.GetKey(KeyCode.KeypadEnter) || Input.GetKeyDown ("enter")){
+			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
 		}
 
 	}

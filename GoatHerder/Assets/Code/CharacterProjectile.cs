@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterProjectile : MonoBehaviour {
     public float speed;
     public float timer;
+    public int myDirection;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,24 @@ public class CharacterProjectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        //Debug.Log("we are doing stuff here");
+        //transform.position += transform.forward * speed * Time.deltaTime;
+        if (myDirection == 0)
+        {
+            transform.position += Vector3.up * speed * Time.deltaTime;
+        }
+        if (myDirection == 1)
+        {
+            transform.position += Vector3.right  * speed * Time.deltaTime;
+        }
+        if (myDirection == 2)
+        {
+            transform.position += Vector3.down * speed * Time.deltaTime;
+        }
+        if (myDirection == 3)
+        {
+            transform.position += Vector3.left * speed * Time.deltaTime;
+        }
         if (timer > 8)
         {
             Destroy(gameObject);
@@ -25,22 +43,34 @@ public class CharacterProjectile : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-
         if (coll.gameObject.tag == "Wall")
         {
-            Debug.Log("We got here");
             speed = 0;
-            //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
-            Destroy(gameObject);
         }
         timer += Time.deltaTime;
+
         if (coll.gameObject.tag == "Enemy")
         {
-            Debug.Log("We got here");
-            //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
             Destroy(gameObject);
             coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
         }
 
+    }
+
+    public void begin(int direction)
+    {
+        myDirection = direction;
+        if (myDirection == 1)
+        {
+            transform.Rotate(new Vector3(0, 0, 1), 270);
+        }
+        if (myDirection == 2)
+        {
+            transform.Rotate(new Vector3(0, 0, 1), 180);
+        }
+        if (myDirection == 3)
+        {
+            transform.Rotate(new Vector3(0, 0, 1), 90);
+        }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class ShootAttack : MonoBehaviour {
+    Animator playerAnimator;
     public float timer;
-    public GameObject arrows;
+    public ArrowScript arrows;
     public float currentCheck;
     public Transform target;
 
@@ -11,6 +12,7 @@ public class ShootAttack : MonoBehaviour {
 	void Start () {
         timer = 0;
         currentCheck = ((Random.value * 2) + 3);
+        playerAnimator = GetComponent<Animator>();
         //currentCheck = 0.5f;
 	}
 	
@@ -23,7 +25,8 @@ public class ShootAttack : MonoBehaviour {
         //transform.rotation = rotation;
         if (timer > currentCheck)
         {
-            Instantiate(arrows, transform.position, rotation);
+            ArrowScript myArrows = (ArrowScript)Instantiate(arrows, transform.position, Quaternion.identity);
+            myArrows.begin(relativePos, playerAnimator.GetInteger("Orientation"));
             timer = 0;
         }
 	}

@@ -25,6 +25,10 @@ public class SkeletonScript : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         //hitboxes[myOrientation].enabled = false;
         playerAnimator.SetBool("Attack", false);
         if (lastPostion == transform.position)
