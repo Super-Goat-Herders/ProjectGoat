@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour {
     Animator playerAnimator;
 	public AudioClip sound;
 
-    public Object arrows;
+    public CharacterProjectile arrows;
     public int orientation;
 	// Use this for initialization
 	void Start () {
@@ -17,27 +17,30 @@ public class CharacterMovement : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, -10f);
         var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         playerAnimator.SetBool("Attack", false);
         if (Input.GetButtonDown("Attack"))
         {
-            Quaternion rotation;
-            //Quaternion rotation = Quaternion.LookRotation(transform.forward);
             if (orientation == 0)
             {
-                rotation = Quaternion.LookRotation(Vector3.up);
+                CharacterProjectile myObject = (CharacterProjectile)Instantiate(arrows, transform.position + new Vector3(0,.5f,0), Quaternion.identity);
+                myObject.begin(0);
             }
-            if (orientation == 1)
+            else if (orientation == 1)
             {
-                rotation = Quaternion.LookRotation(Vector3.right);
+                CharacterProjectile myObject = (CharacterProjectile)Instantiate(arrows, transform.position + new Vector3(.5f, 0, 0), Quaternion.identity);
+                myObject.begin(1);
             }
-            if (orientation == 2)
+            else if (orientation == 2)
             {
-                rotation = Quaternion.LookRotation(Vector3.down);
+                CharacterProjectile myObject = (CharacterProjectile)Instantiate(arrows, transform.position + new Vector3(0, -.5f, 0), Quaternion.identity);
+                myObject.begin(2);
             }
             else
             {
-                rotation = Quaternion.LookRotation(Vector3.left);
+                CharacterProjectile myObject = (CharacterProjectile)Instantiate(arrows, transform.position + new Vector3(-.5f, 0, 0), Quaternion.identity);
+                myObject.begin(3);
             }
 
 
@@ -46,7 +49,6 @@ public class CharacterMovement : MonoBehaviour {
 			if (sound != null){
 				AudioSource.PlayClipAtPoint(sound, transform.position);
 			}
-			Instantiate (arrows, transform.position, rotation);
         }
         transform.position += move * speed * Time.deltaTime;
         if ((Mathf.Abs(Input.GetAxis("Horizontal")) != 0) || (Mathf.Abs(Input.GetAxis("Vertical")) != 0))
@@ -64,13 +66,10 @@ public class CharacterMovement : MonoBehaviour {
                 {
                     orientation = 1;
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    // Camera.current.transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
                     orientation = 3;
-                    //transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    // Camera.current.transform.localRotation = Quaternion.Euler(0, -180, 0);
                 }
 
             }
@@ -94,15 +93,8 @@ public class CharacterMovement : MonoBehaviour {
         }
         else
         {
-
-            //playerAnimator.SetBool("Forward", false);
-            //playerAnimator.SetBool("Backward", false);
             playerAnimator.SetBool("Stopped", true);
-            //playerAnimator.SetBool("Sideways", false);
         }
-
-
-        //Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, -10f);
     }
 
     void OnCollisionEnter2D(Collision2D coll)

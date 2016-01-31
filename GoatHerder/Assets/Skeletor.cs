@@ -25,7 +25,10 @@ public class Skeletor : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        //hitboxes[myOrientation].enabled = false;
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         playerAnimator.SetBool("Attack", false);
         if (lastPostion == transform.position)
         {

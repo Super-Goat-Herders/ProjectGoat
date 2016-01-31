@@ -16,34 +16,10 @@ public class HunterScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if ((target.position.x > transform.position.x) && (target.position.y > transform.position.y))
-        //{
-        //    playerAnimator.SetBool("Up", false);
-        //    playerAnimator.SetBool("Down", false);
-        //    playerAnimator.SetBool("Left", false);
-        //    playerAnimator.SetBool("Right", false);
-        //}
-        //else if ((target.position.x > transform.position.x) && (target.position.y < transform.position.y))
-        //{
-        //    playerAnimator.SetBool("Up", false);
-        //    playerAnimator.SetBool("Down", false);
-        //    playerAnimator.SetBool("Left", false);
-        //    playerAnimator.SetBool("Right", false);
-        //}
-        //else if ((target.position.x < transform.position.x) && (target.position.y > transform.position.y))
-        //{
-        //    playerAnimator.SetBool("Up", false);
-        //    playerAnimator.SetBool("Down", false);
-        //    playerAnimator.SetBool("Left", false);
-        //    playerAnimator.SetBool("Right", false);
-        //}
-        //else
-        //{
-        //    playerAnimator.SetBool("Up", false);
-        //    playerAnimator.SetBool("Down", false);
-        //    playerAnimator.SetBool("Left", false);
-        //    playerAnimator.SetBool("Right", false);
-        //}
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         Vector3 targetRel = target.position - transform.position;
         if (Mathf.Abs(targetRel.x) > Mathf.Abs(targetRel.y))
         {
