@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class LoadLevel : MonoBehaviour
 {
-    public string nextLevel;
-    void Update(){
-        Application.LoadLevel ( nextLevel );
-    }
-    
+	void OnTriggerEnter2D(Collider2D other) 
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex+1);
+	}    
     
 }
