@@ -4,6 +4,7 @@ using System.Collections;
 public class ArrowScript : MonoBehaviour {
     public float speed;
     public float timer;
+    Vector3 myDirection;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +14,7 @@ public class ArrowScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += myDirection * speed * Time.deltaTime;
         if (timer > 8)
         {
             Destroy(gameObject);
@@ -40,6 +41,16 @@ public class ArrowScript : MonoBehaviour {
             Destroy(gameObject);
         }
         timer += Time.deltaTime;
+    }
 
+    public void begin(Vector3 direction, int orientation)
+    {
+        myDirection = direction.normalized;
+        float thisrotation = Mathf.Atan2(direction.y, direction.x) - 90;
+        thisrotation = thisrotation * 180 / Mathf.PI;
+        Debug.Log(thisrotation);
+        transform.rotation *= Quaternion.Euler(0f, 0f, thisrotation);
+        //transform.Rotate(new Vector3(0,0,1), thisrotation);
     }
 }
+
