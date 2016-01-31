@@ -7,6 +7,7 @@ public class Health : MonoBehaviour {
 	public static int maxHealth = 6;
 	public GameObject heartFull;
 	public ParticleSystem explo;
+	public AudioClip sound;
 
 	private List<Transform> hearts = new List<Transform>();
 
@@ -38,9 +39,7 @@ public class Health : MonoBehaviour {
 
 	// Use this to take damage
 	public void TakeDamage(int damage){
-        
-        
-        
+		AudioSource.PlayClipAtPoint(sound, transform.position);
 		if (currentHP > 0) {
 			Transform dead = hearts [hearts.Count - 1];
 			Vector3 loc = new Vector3(x+((hearts.Count-1)*Sx), y);

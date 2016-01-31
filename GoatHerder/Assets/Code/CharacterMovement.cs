@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CharacterMovement : MonoBehaviour {
-    float speed = 2f;
+    public float speed = 2f;
 
 	// Use this for initialization
 	void Start () {
