@@ -1,26 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoatFollow : MonoBehaviour
-{
+public class DemonBoss : MonoBehaviour {
     public Transform target;
     Animator playerAnimator;
     Vector3 lastPostion;
-    public Component[] hitboxes;
+    public BoxCollider2D[] hitboxes;
+    public Transform[] smackBoxes;
     public int myOrientation;
+    public float timer;
+    public int HP;
 
-    // Use this for initialization
-    void Start()
-    {
+	// Use this for initialization
+	void Start () {
         playerAnimator = GetComponent<Animator>();
         lastPostion = transform.position;
         hitboxes = GetComponentsInChildren<BoxCollider2D>();
-    }
-
-    // Update is called once per frame
+        smackBoxes = GetComponentsInChildren<Transform>();
+        timer = 0;
+        HP = 75;
+	}
+	
+	// Update is called once per frame
     void Update()
     {
-        //playerAnimator.SetBool("Attack", false);
+        //hitboxes[myOrientation].enabled = false;
+        playerAnimator.SetBool("Attack", false);
         if (lastPostion == transform.position)
         {
             playerAnimator.SetBool("Moving", false);
@@ -58,7 +63,30 @@ public class GoatFollow : MonoBehaviour
                 playerAnimator.SetInteger("Orientation", 2);
             }
         }
+        timer += Time.deltaTime;
+        if (timer > 1)
+        {
+            if ((Mathf.Sqrt(Mathf.Pow(transform.position.x - target.position.x, 2) + Mathf.Pow(transform.position.y - target.position.y, 2))) < 1)
+            {
+                playerAnimator.SetBool("Attack", true);
+                
+                //hitboxes[myOrientation].enabled = true;
+                if ((Mathf.Sqrt(Mathf.Pow(smackBoxes[myOrientation].position.x - target.position.x, 2) + Mathf.Pow(smackBoxes[myOrientation].position.y - target.position.y, 2))) < .3)
+                {
+                        target.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
+                        timer = 0;
+                        
+                }
+            }
+        }
+    }
 
+    public void TakeDamage(int damage)
+    {
+        if (HP > 0)
+        {
+            HP -= damage;
+        }
 
     }
 }

@@ -4,11 +4,14 @@ using System.Collections;
 public class HunterScript : MonoBehaviour {
     private Transform target;
     Animator playerAnimator;
+    public int HP;
 
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
+        HP = 10;
 	    target = GameObject.FindWithTag("Hero").transform;
+
 	}
 	
 	// Update is called once per frame
@@ -68,4 +71,13 @@ public class HunterScript : MonoBehaviour {
         }
         //Debug.Log(playerAnimator.GetInteger("Orientation"));
 	}
+
+    public void TakeDamage(int damage)
+    {
+        if (HP > 0)
+        {
+            HP -= damage;
+        }
+
+    }
 }
