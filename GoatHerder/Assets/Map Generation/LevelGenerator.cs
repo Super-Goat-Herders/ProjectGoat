@@ -21,6 +21,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject[] spawnablePrefabs;
     public float spawnMultiplier = 1f;
     public GameObject player;
+    public GameObject goat;
 
     private TileType[][] tiles;                               
     private Room[] rooms;                                     
@@ -69,7 +70,10 @@ public class LevelGenerator : MonoBehaviour
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
         //This puts the player in the lower left corner of the first room
         Vector3 playerPos = new Vector3(rooms[0].xPos, rooms[0].yPos, 0);
-        Instantiate(player, playerPos, Quaternion.identity);    
+        Vector3 goatPos = new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, 0);
+        Instantiate(player, playerPos, Quaternion.identity);
+        Instantiate(goat, goatPos, Quaternion.identity);    
+        
         for (int i = 1; i < rooms.Length; i++)
         {
             rooms[i] = new Room();
