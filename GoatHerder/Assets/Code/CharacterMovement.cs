@@ -6,9 +6,12 @@ public class CharacterMovement : MonoBehaviour {
     Animator playerAnimator;
 	public AudioClip sound;
 	public ParticleSystem explo;
+    public Object arrows;
+    public int orientation;
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
+        orientation = 2;
 	}
 	
 	// Update is called once per frame
@@ -18,8 +21,32 @@ public class CharacterMovement : MonoBehaviour {
         playerAnimator.SetBool("Attack", false);
         if (Input.GetButtonDown("Attack"))
         {
+            Quaternion rotation;
+            //Quaternion rotation = Quaternion.LookRotation(transform.forward);
+            if (orientation == 0)
+            {
+                rotation = Quaternion.LookRotation(Vector3.up);
+            }
+            if (orientation == 1)
+            {
+                rotation = Quaternion.LookRotation(Vector3.right);
+            }
+            if (orientation == 2)
+            {
+                rotation = Quaternion.LookRotation(Vector3.down);
+            }
+            else
+            {
+                rotation = Quaternion.LookRotation(Vector3.left);
+            }
+
+
             playerAnimator.SetBool("Attack", true);
 			AudioSource.PlayClipAtPoint(sound, transform.position);
+            Instantiate(arrows, transform.position, rotation);
+
+
+
         }
         transform.position += move * speed * Time.deltaTime;
         if ((Mathf.Abs(Input.GetAxis("Horizontal")) != 0) || (Mathf.Abs(Input.GetAxis("Vertical")) != 0))
@@ -35,11 +62,13 @@ public class CharacterMovement : MonoBehaviour {
                 playerAnimator.SetBool("Sideways", true);
                 if (Input.GetAxis("Horizontal") > 0)
                 {
+                    orientation = 1;
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
                     // Camera.current.transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
+                    orientation = 3;
                     //transform.localRotation = Quaternion.Euler(0, 180, 0);
                     // Camera.current.transform.localRotation = Quaternion.Euler(0, -180, 0);
                 }
@@ -49,12 +78,14 @@ public class CharacterMovement : MonoBehaviour {
             {
                 if (Input.GetAxis("Vertical") > 0)
                 {
+                    orientation = 0;
                     playerAnimator.SetBool("Forward", false);
                     playerAnimator.SetBool("Backward", true);
                     playerAnimator.SetBool("Sideways", false);
                 }
                 else
                 {
+                    orientation = 2;
                     playerAnimator.SetBool("Forward", true);
                     playerAnimator.SetBool("Backward", false);
                     playerAnimator.SetBool("Sideways", false);
