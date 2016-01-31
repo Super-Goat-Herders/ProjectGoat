@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShootAttack : MonoBehaviour {
     public float timer;
-    public Object arrows;
+    public GameObject arrows;
     public float currentCheck;
     public Transform target;
 
@@ -23,7 +23,7 @@ public class ShootAttack : MonoBehaviour {
         //transform.rotation = rotation;
         if (timer > currentCheck)
         {
-            Object MyArrow = Instantiate(arrows, transform.position, rotation);
+            Instantiate(arrows, transform.position, rotation);
             timer = 0;
         }
 	}

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -15,7 +17,9 @@ public class LevelGenerator : MonoBehaviour
     public IntRange corridorLength = new IntRange(6, 10);    
     public GameObject[] floorTiles;                          
     public GameObject[] wallTiles;                           
-    public GameObject[] outerWallTiles;                      
+    public GameObject[] outerWallTiles;
+    public GameObject[] spawnablePrefabs;
+    public float spawnMultiplier = 1f;
     public GameObject player;
 
     private TileType[][] tiles;                               
@@ -85,6 +89,7 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < rooms.Length; i++)
         {
             Room currentRoom = rooms[i];
+            int roomSize = currentRoom.roomWidth*currentRoom.roomHeight;
             for (int j = 0; j < currentRoom.roomWidth; j++)
             {
                 int xCoord = currentRoom.xPos + j;
@@ -93,6 +98,11 @@ public class LevelGenerator : MonoBehaviour
                     int yCoord = currentRoom.yPos + k;
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
                     tiles[xCoord][yCoord] = TileType.Floor;
+                    if (Random.value < spawnMultiplier/roomSize)
+                    {
+                        Debug.Log("Spawning a thingy");
+                        InstantiateFromArray(spawnablePrefabs, xCoord, yCoord);
+                    }
                 }
             }
         }
