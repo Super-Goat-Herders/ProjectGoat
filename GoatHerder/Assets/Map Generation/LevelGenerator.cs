@@ -72,7 +72,8 @@ public class LevelGenerator : MonoBehaviour
         Vector3 playerPos = new Vector3(rooms[0].xPos, rooms[0].yPos, 0);
         Vector3 goatPos = new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, 0);
         Instantiate(player, playerPos, Quaternion.identity);
-        Instantiate(goat, goatPos, Quaternion.identity);    
+		Instantiate (goat, goatPos, Quaternion.identity);   
+
         
         for (int i = 1; i < rooms.Length; i++)
         {
