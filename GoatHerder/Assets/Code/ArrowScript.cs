@@ -8,6 +8,7 @@ public class ArrowScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         speed = 3f;
+        timer = 0;
 	}
 	
 	// Update is called once per frame

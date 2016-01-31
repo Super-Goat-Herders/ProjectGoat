@@ -5,12 +5,10 @@ public class CharacterMovement : MonoBehaviour {
     public float speed = 2f;
     Animator playerAnimator;
 	public AudioClip sound;
-    public float timer;
 	public ParticleSystem explo;
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
-        timer = 0;
 	}
 	
 	// Update is called once per frame
