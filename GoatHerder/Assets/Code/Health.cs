@@ -8,6 +8,7 @@ public class Health : MonoBehaviour {
 	public static int maxHealth = 6;
 	public GameObject heartFull;
 	public ParticleSystem explo;
+	public ParticleSystem exploDeath;
 	public AudioClip sound;
 	public AudioClip soundDead1;
 	public AudioClip soundDead2;
@@ -35,10 +36,12 @@ public class Health : MonoBehaviour {
 	    }
 		if (currentHP <= 0 && !isDead) {
             isDead = true;
-			AudioSource.PlayClipAtPoint(soundDead1, transform.position, 0.7f);
-			AudioSource.PlayClipAtPoint(soundDead2, transform.position, 0.6f);
 			Vector3 loc = gameObject.transform.position;
-			ParticleSystem newExplo = (ParticleSystem)Instantiate(explo, loc, transform.rotation);
+			ParticleSystem newExplo = (ParticleSystem)Instantiate(exploDeath, loc, transform.rotation);
+			if (soundDead1 != null || soundDead2 != null) {
+				AudioSource.PlayClipAtPoint (soundDead1, transform.position, 0.7f);
+				AudioSource.PlayClipAtPoint (soundDead2, transform.position, 0.6f);
+			}
 			Invoke ("Reset", 2);
 		}
 		while(hearts.Count != currentHP){

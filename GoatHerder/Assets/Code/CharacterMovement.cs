@@ -5,7 +5,6 @@ public class CharacterMovement : MonoBehaviour {
     public float speed = 2f;
     Animator playerAnimator;
 	public AudioClip sound;
-	public ParticleSystem explo;
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
@@ -19,7 +18,9 @@ public class CharacterMovement : MonoBehaviour {
         if (Input.GetButtonDown("Attack"))
         {
             playerAnimator.SetBool("Attack", true);
-			AudioSource.PlayClipAtPoint(sound, transform.position);
+			if (sound != null){
+				AudioSource.PlayClipAtPoint(sound, transform.position);
+			}
         }
         transform.position += move * speed * Time.deltaTime;
         if ((Mathf.Abs(Input.GetAxis("Horizontal")) != 0) || (Mathf.Abs(Input.GetAxis("Vertical")) != 0))
