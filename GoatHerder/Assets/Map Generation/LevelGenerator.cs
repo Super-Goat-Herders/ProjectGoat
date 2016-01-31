@@ -22,6 +22,8 @@ public class LevelGenerator : MonoBehaviour
     public float spawnMultiplier = 1f;
     public GameObject player;
     public GameObject goat;
+    
+    public GameObject endGoal;
 
     private TileType[][] tiles;                               
     private Room[] rooms;                                     
@@ -86,6 +88,7 @@ public class LevelGenerator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
         }
+        
     }
 
 
@@ -110,7 +113,12 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
             }
+            Vector3 goalPos = new Vector3(rooms[i].xPos + 2, rooms[i].yPos + 2, 0);
+            Instantiate(endGoal, goalPos, Quaternion.identity);
         }
+       
+            
+  
     }
 
 
