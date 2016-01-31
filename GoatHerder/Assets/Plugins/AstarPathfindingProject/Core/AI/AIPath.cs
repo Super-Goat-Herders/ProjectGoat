@@ -169,7 +169,8 @@ public class AIPath : MonoBehaviour {
 	 * \see RepeatTrySearchPath
 	 */
 	protected virtual void Start () {
-		startHasRun = true;
+		target = GameObject.FindWithTag("Hero").transform;
+        startHasRun = true;
 		OnEnable ();
 	}
 
