@@ -11,6 +11,7 @@ public class Health : MonoBehaviour {
 	public AudioClip sound;
 	public AudioClip soundDead1;
 	public AudioClip soundDead2;
+    private bool isDead = false;
 
 	private List<Transform> hearts = new List<Transform>();
 
@@ -32,13 +33,13 @@ public class Health : MonoBehaviour {
 	    if (Input.GetKeyDown ("space")) {
 			TakeDamage (1);
 	    }
-		if (currentHP <= 0) {
+		if (currentHP <= 0 && !isDead) {
+            isDead = true;
 			AudioSource.PlayClipAtPoint(soundDead1, transform.position, 0.7f);
 			AudioSource.PlayClipAtPoint(soundDead2, transform.position, 0.6f);
 			Vector3 loc = gameObject.transform.position;
 			ParticleSystem newExplo = (ParticleSystem)Instantiate(explo, loc, transform.rotation);
 			Invoke ("Reset", 2);
-
 		}
 		while(hearts.Count != currentHP){
 			Vector3 loc = new Vector3(x+(hearts.Count*Sx), y);

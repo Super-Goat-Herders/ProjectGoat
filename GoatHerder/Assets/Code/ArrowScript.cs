@@ -27,10 +27,8 @@ public class ArrowScript : MonoBehaviour {
         {
             Debug.Log("We got here");
             speed = 0;
+            //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
+            Destroy(gameObject);
         }
-
-        
-
-
     }
 }

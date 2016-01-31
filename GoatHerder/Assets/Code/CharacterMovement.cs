@@ -36,10 +36,12 @@ public class CharacterMovement : MonoBehaviour {
                 if (Input.GetAxis("Horizontal") > 0)
                 {
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    // Camera.current.transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
-                    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    // transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    // Camera.current.transform.localRotation = Quaternion.Euler(0, -180, 0);
                 }
 
             }
