@@ -14,6 +14,7 @@ public class ArrowScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        timer += Time.deltaTime;
         transform.position += myDirection * speed * Time.deltaTime;
         if (timer > 8)
         {
@@ -28,11 +29,12 @@ public class ArrowScript : MonoBehaviour {
         {
             coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
-        } else {
-            speed = 0; 
+        } 
+        //else {
+         //   speed = 0; 
             //Destroy(gameObject);
-        }
-
+        //}
+        
         if (coll.gameObject.tag == "Wall")
         {
             Debug.Log("We got here");
@@ -40,7 +42,8 @@ public class ArrowScript : MonoBehaviour {
             //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
             Destroy(gameObject);
         }
-        timer += Time.deltaTime;
+         
+        //timer += Time.deltaTime;
     }
 
     public void begin(Vector3 direction, int orientation)
