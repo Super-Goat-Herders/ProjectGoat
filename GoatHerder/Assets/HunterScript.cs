@@ -65,6 +65,6 @@ public class HunterScript : MonoBehaviour {
                 playerAnimator.SetInteger("Orientation", 2);
             }
         }
-        Debug.Log(playerAnimator.GetInteger("Orientation"));
+        //Debug.Log(playerAnimator.GetInteger("Orientation"));
 	}
 }

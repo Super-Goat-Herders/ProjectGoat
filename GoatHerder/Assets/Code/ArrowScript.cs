@@ -21,6 +21,8 @@ public class ArrowScript : MonoBehaviour {
         {
             coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
+        } else {
+            speed = 0; Destroy(gameObject);
         }
 
         if (coll.gameObject.tag == "Wall")
