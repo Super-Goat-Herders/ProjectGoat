@@ -31,13 +31,15 @@ public class Health : MonoBehaviour {
 		//if (Input.GetKeyDown ("n")) {
 		//	Heal (1);
 		//}
+		y = gameObject.transform.position.y + 1;
+		x = gameObject.transform.position.x - 1;
 	    if (Input.GetKeyDown ("space")) {
 			TakeDamage (1);
 	    }
 		if (currentHP <= 0 && !isDead) {
             isDead = true;
-			Vector3 loc = gameObject.transform.position;
-			ParticleSystem newExplo = (ParticleSystem)Instantiate(exploDeath, loc, transform.rotation);
+			Vector3 loc1 = gameObject.transform.position;
+			ParticleSystem newExplo = (ParticleSystem)Instantiate(exploDeath, loc1, transform.rotation);
 			if (soundDead1 != null || soundDead2 != null) {
 				AudioSource.PlayClipAtPoint (soundDead1, transform.position, 0.7f);
 				AudioSource.PlayClipAtPoint (soundDead2, transform.position, 0.6f);
@@ -45,9 +47,9 @@ public class Health : MonoBehaviour {
 			Invoke ("Reset", 2);
 		}
 		while(hearts.Count != currentHP){
-			Vector3 loc = new Vector3(x+(hearts.Count*Sx), y);
-			Transform newHeart =((GameObject)Instantiate(heartFull, loc, transform.rotation)).transform;
-			newHeart.parent = this.transform.parent;
+			Vector3 loc2 = new Vector3(x+(hearts.Count*Sx), y);
+			Transform newHeart =((GameObject)Instantiate(heartFull, loc2, transform.rotation)).transform;
+			newHeart.parent = gameObject.transform;
 			hearts.Add (newHeart);
 
 		}
@@ -58,8 +60,8 @@ public class Health : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(sound, transform.position);
 		if (currentHP > 0) {
 			Transform dead = hearts [hearts.Count - 1];
-			Vector3 loc = new Vector3(x+((hearts.Count-1)*Sx), y);
-			ParticleSystem newExplo = (ParticleSystem)Instantiate(explo, loc, transform.rotation);
+			Vector3 loc3 = new Vector3(x+((hearts.Count-1)*Sx), y);
+			ParticleSystem newExplo = (ParticleSystem)Instantiate(explo, loc3, transform.rotation);
 			hearts.Remove (dead);
 			Destroy (dead.gameObject);
 			currentHP -= damage;
