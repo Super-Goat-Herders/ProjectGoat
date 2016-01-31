@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour {
     public float speed = 2f;
     Animator playerAnimator;
+	public AudioClip sound;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class CharacterMovement : MonoBehaviour {
         if (Input.GetButtonDown("Attack"))
         {
             playerAnimator.SetBool("Attack", true);
+			AudioSource.PlayClipAtPoint(sound, transform.position);
         }
         transform.position += move * speed * Time.deltaTime;
         if ((Mathf.Abs(Input.GetAxis("Horizontal")) != 0) || (Mathf.Abs(Input.GetAxis("Vertical")) != 0))
