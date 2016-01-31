@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HunterScript : MonoBehaviour {
-    public Transform target;
+    private Transform target;
     Animator playerAnimator;
     public int HP;
 
@@ -10,6 +10,8 @@ public class HunterScript : MonoBehaviour {
 	void Start () {
         playerAnimator = GetComponent<Animator>();
         HP = 10;
+	    target = GameObject.FindWithTag("Hero").transform;
+
 	}
 	
 	// Update is called once per frame
