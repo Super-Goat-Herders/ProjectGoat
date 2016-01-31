@@ -11,6 +11,7 @@ public class ShootAttack : MonoBehaviour {
 	void Start () {
         timer = 0;
         currentCheck = ((Random.value * 2) + 3);
+        //currentCheck = 0.5f;
 	}
 	
 	// Update is called once per frame
