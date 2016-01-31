@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerAnimator = GetComponent<Animator>();
+        timer = 0;
 	}
 	
 	// Update is called once per frame

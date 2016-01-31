@@ -14,7 +14,7 @@ public class SkeletonScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        playerAnimator.SetBool("Attack", true);
+        playerAnimator.SetBool("Attack", false);
         if (lastPostion == transform.position)
         {
             playerAnimator.SetBool("Moving", false);
@@ -48,10 +48,13 @@ public class SkeletonScript : MonoBehaviour {
                 playerAnimator.SetInteger("Orientation", 2);
             }
         }
+
+        
 	}
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+        Debug.Log("This is working");
         if (coll.gameObject.tag == "Hero")
         {
             playerAnimator.SetBool("Attack", true);

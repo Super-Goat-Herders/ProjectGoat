@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ArrowScript : MonoBehaviour {
     public float speed;
+    public float timer;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +23,8 @@ public class ArrowScript : MonoBehaviour {
             coll.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
         } else {
-            speed = 0; Destroy(gameObject);
+            speed = 0; 
+            //Destroy(gameObject);
         }
 
         if (coll.gameObject.tag == "Wall")
@@ -30,6 +32,12 @@ public class ArrowScript : MonoBehaviour {
             Debug.Log("We got here");
             speed = 0;
             //If you want arrows to stick to the wall, limit the number of them and disable it's ability to cause damage
+            Destroy(gameObject);
+        }
+        timer += Time.deltaTime;
+
+        if (timer > 8)
+        {
             Destroy(gameObject);
         }
     }
