@@ -194,10 +194,11 @@ public class LevelGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
-        Vector3 position = new Vector3(Mathf.Round(xCoord), Mathf.Round(yCoord), 0f);
+        Vector3 position = new Vector3(xCoord, yCoord, 0f);
 
         // Create an instance of the prefab from the random index of the array.
         GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+        tileInstance.transform.localScale = new Vector3(1.01f, 1.01f, 1.0f);
 
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
