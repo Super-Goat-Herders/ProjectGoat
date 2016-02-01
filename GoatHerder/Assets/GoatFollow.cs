@@ -15,6 +15,7 @@ public class GoatFollow : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         lastPostion = transform.position;
         hitboxes = GetComponentsInChildren<BoxCollider2D>();
+        target = GameObject.FindWithTag("Hero").transform;
     }
 
     // Update is called once per frame

@@ -70,6 +70,7 @@ public class CharacterMovement : MonoBehaviour {
                 else
                 {
                     orientation = 3;
+                    transform.localRotation = Quaternion.Euler(0, 180, 0);
                 }
 
             }
