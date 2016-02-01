@@ -70,12 +70,12 @@ public class DemonBoss : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > 1)
         {
-            if ((Mathf.Sqrt(Mathf.Pow(transform.position.x - target.position.x, 2) + Mathf.Pow(transform.position.y - target.position.y, 2))) < 1)
+            if ((Mathf.Sqrt(Mathf.Pow(transform.position.x - target.position.x, 2) + Mathf.Pow(transform.position.y - target.position.y, 2))) < 2)
             {
                 playerAnimator.SetBool("Attack", true);
                 
                 //hitboxes[myOrientation].enabled = true;
-                if ((Mathf.Sqrt(Mathf.Pow(smackBoxes[myOrientation].position.x - target.position.x, 2) + Mathf.Pow(smackBoxes[myOrientation].position.y - target.position.y, 2))) < .3)
+                if ((Mathf.Sqrt(Mathf.Pow(smackBoxes[myOrientation].position.x - target.position.x, 2) + Mathf.Pow(smackBoxes[myOrientation].position.y - target.position.y, 2))) < .6)
                 {
                         target.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
                         timer = 0;

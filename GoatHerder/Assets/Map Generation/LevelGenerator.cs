@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
+
+    public float Timer;
     // Types of items to be put down. NPC's could go here as well
     public enum TileType { Wall, Floor }
 
@@ -45,6 +47,17 @@ public class LevelGenerator : MonoBehaviour
 
         InstantiateTiles();
         InstantiateOuterWalls();
+
+        //AstarPath.active.Scan();
+    }
+
+    void update()
+    {
+        Timer += Time.deltaTime;
+        if (Timer > 10)
+        {
+            AstarPath.active.Scan();
+        }
     }
 
 
