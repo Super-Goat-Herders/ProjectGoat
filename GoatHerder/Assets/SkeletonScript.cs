@@ -18,6 +18,7 @@ public class SkeletonScript : MonoBehaviour {
         lastPostion = transform.position;
         hitboxes = GetComponentsInChildren<BoxCollider2D>();
         smackBoxes = GetComponentsInChildren<Transform>();
+		target = GameObject.FindWithTag("Hero").transform;
         timer = 0;
         HP = 10;
 	}
