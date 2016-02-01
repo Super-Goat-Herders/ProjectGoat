@@ -88,6 +88,8 @@ public class LevelGenerator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
         }
+        Vector3 goalPos = new Vector3(rooms[rooms.Length - 1].xPos + 2, rooms[rooms.Length - 1].yPos + 2, 0);
+            Instantiate(endGoal, goalPos, Quaternion.identity);
         
     }
 
@@ -113,8 +115,6 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
             }
-            Vector3 goalPos = new Vector3(rooms[i].xPos + 2, rooms[i].yPos + 2, 0);
-            Instantiate(endGoal, goalPos, Quaternion.identity);
         }
        
             
