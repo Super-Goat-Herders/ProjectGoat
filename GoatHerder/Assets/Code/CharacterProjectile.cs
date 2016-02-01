@@ -9,7 +9,7 @@ public class CharacterProjectile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        speed = 3f;
+        speed = 5f;
         timer = 0;
 		arrowDamage = 1;
         //Vector3 temp = new Vector3(0, 0, 0-1f);

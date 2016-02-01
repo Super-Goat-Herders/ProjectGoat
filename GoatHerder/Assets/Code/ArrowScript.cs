@@ -8,7 +8,7 @@ public class ArrowScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        speed = 3f;
+        speed = 5f;
         timer = 0;
 	}
 	
